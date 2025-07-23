@@ -1,3 +1,14 @@
+<?php require "config/config.php"     ?>
+<?php
+
+$books = $conn->query("SELECT * FROM book_table");
+$books -> execute();
+
+$allBooks = $books -> fetchAll(PDO::FETCH_OBJ);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,8 +24,8 @@
 
 <body>
     <?php
-    include("utils/header.html");
-     ?>
+    include("utils/header.php");
+    ?>
 
     <main>
         <section class="modal fade" id="bookForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -25,18 +36,18 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="<?php htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
+                        <form action="crud/insert.php" method="post">
                             <div class="row g-2">
                                 <div class="col-sm">
                                     <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="bookName" name="bookName" placeholder="Enter Book Name">
+                                        <input type="text" class="form-control" id="bookName" name="bookName" placeholder="Enter Book Name" required>
                                         <label for="bookName" class="form-label">Book Name</label>
 
                                     </div>
                                 </div>
                                 <div class="col-sm">
                                     <div class="form-floating mb-3">
-                                        <input type="text" name="auhtorName" id="authorName" class="form-control" placeholder="Enter Author">
+                                        <input type="text" name="authorName" id="authorName" class="form-control" placeholder="Enter Author" required>
                                         <label for="authorNName">Enter Author</label>
                                     </div>
                                 </div>
@@ -44,21 +55,21 @@
                             <div class="row g-2">
                                 <div class="col-sm">
                                     <div class="form-floating mb-3">
-                                        <input type="date" name="datePublished" id="datePublished" class="form-control" placeholder="Select Date Published">
+                                        <input type="date" name="datePublished" id="datePublished" class="form-control" placeholder="Select Date Published" required>
                                         <label for="datePublished">Date Published</label>
                                     </div>
                                 </div>
                                 <div class="col-sm">
                                     <div class="form-floating mb-3">
-                                        <input type="text" name="publisherName" id="publisher" class="form-control" placeholder="Enter Publisher">
+                                        <input type="text" name="publisherName" id="publisher" class="form-control" placeholder="Enter Publisher" required>
                                         <label for="publisher">Publisher</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row g-2">
                                 <div class="col-sm">
-                                    <select class="form-select mb-3" name="genre" id="genreSelection" aria-label="Book Genre">
-                                        <option selected disabled>Select Genre</option>
+                                    <select class="form-select mb-3" name="genre" id="genreSelection" aria-label="Book Genre" required>
+                                        <option selected disabled value="">Select Genre</option>
                                         <option value="Fiction">Fiction</option>
                                         <option value="Non-Fiction">Non-Fiction</option>
                                         <option value="Fantasy">Fantasy</option>
@@ -77,21 +88,30 @@
                                         <option value="True Crime">True Crime</option>
                                     </select>
                                 </div>
-                                <div class="col">
+                                <div class="col-sm">
                                     <div class="form-floating mb-3">
-                                        <input type="number" name="price" id="price" class="form-control" placeholder="Enter Price">
+                                        <input type="number" name="price" id="price" class="form-control" placeholder="Enter Price" required>
                                         <label for="price">Enter price</label>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="col-12">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" name="imageUrl" class="form-control" id="image_url" name="image_url" placeholder="Enter Image URL">
+                                            <label for="image_url">Image URL</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
 
-                        </form>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Add Book</button>
+                        <button type="submit" class="btn btn-primary">Add Book</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </section>
@@ -115,7 +135,6 @@
                     <div class="carousel-caption top-0 mt-4">
                         <p class="fs-3 mt-5 text-uppercase">organize your books</p>
                         <h1 class="display-1 fw-bolder text-capitalize">jilbert bookstore</h1>
-                        <button type="button" class="btn btn-primary px-4 py-2 fs-5 mt-4">Go Manage</button>
                     </div>
                 </div>
                 <div class="carousel-item c-item">
@@ -123,7 +142,6 @@
                     <div class="carousel-caption top-0 mt-4">
                         <p class="fs-3 mt-5 text-uppercase">organize your books</p>
                         <h1 class="display-1 fw-bolder text-capitalize">jilbert bookstore</h1>
-                        <button type="button" class="btn btn-primary px-4 py-2 fs-5 mt-4">Go Manage</button>
                     </div>
                 </div>
             </div>
@@ -156,40 +174,27 @@
 
         <section id="management">
             <div class="container text-center my-5">
-                <h1>Management</h1>
+                <h1>Available Books</h1>
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg mb-5">
-                        <div class="card c-carditem">
-                            <img src="https://images.pexels.com/photos/207662/pexels-photo-207662.jpeg" class="card-img-top c-cardimg" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Manage Books</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <?php foreach($allBooks as $book):   ?>
+                    <div class="col-md-4 col-xl-3 col-sm-6 mb-5 px-5 px-sm-1 px-md-2 px-xl-3 px-xxl-4">
+                        <div class="card c-carditem h-100">
+                            <img src="<?php echo $book->image;  ?>" height="300px"  class="card-img-top" alt="...">
+                            <div class="card-body ">
+                                <h2 class="card-title "><?php echo $book->name  ?></h2>
+                                <p class="mb-0">Genre: <?php echo $book->genre  ?></p>
+                                <p class="card-text mb-0">Author: <?php echo $book->author  ?></p>
+                                <p class="mb-0">Publisher: <?php echo $book-> publisher ?></p>
+                                <p class="mb-0">Published: <?php echo $book-> date_published ?></p>
+                                <hr>
+                                <h4>Price: ₱ <?php echo $book-> price ?> </h4>
+
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg mb-5">
-                        <div class="card c-carditem">
-                            <img src="https://images.pexels.com/photos/6830879/pexels-photo-6830879.jpeg" class="card-img-top c-cardimg" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Manage Authors</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg mb-5">
-                        <div class="card c-carditem">
-                            <img src="https://images.pexels.com/photos/4476139/pexels-photo-4476139.jpeg" class="card-img-top c-cardimg" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Manage Publishers</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
 
@@ -240,7 +245,7 @@
         </section>
 
     </main>
-    <?php 
+    <?php
     include("utils/footer.html");
 
     ?>
