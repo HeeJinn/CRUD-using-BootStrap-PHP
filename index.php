@@ -1,7 +1,7 @@
 <?php require "config/config.php"     ?>
 <?php
 
-$books = $conn->query("SELECT * FROM book_table");
+$books = $conn->query("SELECT * FROM book_table LIMIT 5");
 $books -> execute();
 
 $allBooks = $books -> fetchAll(PDO::FETCH_OBJ);
@@ -174,7 +174,7 @@ $allBooks = $books -> fetchAll(PDO::FETCH_OBJ);
 
         <section id="management">
             <div class="container text-center my-5">
-                <h1>Available Books</h1>
+                <h1>Top 5 selling books</h1>
             </div>
             <div class="container">
                 <div class="row">

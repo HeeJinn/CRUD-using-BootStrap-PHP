@@ -1,14 +1,14 @@
 <?php
-    require "../config/config.php";
-    $active_page = "book";
+require "../config/config.php";
+$active_page = "book";
 
 ?>
 
 <?php
-    $books = $conn->query("SELECT * FROM book_table");
-    $books -> execute();
+$books = $conn->query("SELECT * FROM book_table");
+$books->execute();
 
-    $allBooks = $books -> fetchAll(PDO::FETCH_OBJ);
+$allBooks = $books->fetchAll(PDO::FETCH_OBJ);
 ?>
 
 
@@ -31,7 +31,9 @@
     <main>
         <section class="container my-5">
             <div class="row mb-3">
-                <div class="col-sm-6 col-md-8 col-xl-9"><h1>List of Books</h1></div>
+                <div class="col-sm-6 col-md-8 col-xl-9">
+                    <h1>List of Books</h1>
+                </div>
                 <div class="col-sm-6 col-md-4 col-xl-3 ">
                     <div class="form-floating">
                         <input type="text" name="" id="searchbar" class="form-control" placeholder="Search Book">
@@ -39,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card table-responsive">
+            <div class="card table-responsive shadow">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -55,21 +57,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($allBooks as $book): ?>
-                        <tr>
-                            <th scope="row"><?php echo $book -> _id ?></th>
-                            <td><?php echo $book -> name ?></td>
-                            <td><?php echo $book -> author ?></td>
-                            <td><?php echo $book -> publisher ?></td>
-                            <td><?php echo $book -> date_published ?></td>
-                            <td><?php echo $book -> genre ?></td>
-                            <td><?php echo $book -> price ?></td>
-                            <td class="text-center fs-5"><i class="bi bi-card-image"></i></td>
-                            <td>
-                                <button class="btn btn-primary btn-sm px-4"><i class="bi bi-pen"></i></button>
-                                <button class="btn btn-danger btn-sm px-4"><i class="bi bi-trash"></i></button>
-                            </td>
-                        </tr>
+                        <?php foreach ($allBooks as $book): ?>
+                            <tr>
+                                <th scope="row"><?php echo $book->_id ?></th>
+                                <td><?php echo $book->name ?></td>
+                                <td><?php echo $book->author ?></td>
+                                <td><?php echo $book->publisher ?></td>
+                                <td><?php echo $book->date_published ?></td>
+                                <td><?php echo $book->genre ?></td>
+                                <td><?php echo $book->price ?></td>
+                                <td class="text-center fs-5"><i class="bi bi-card-image"></i></td>
+                                <td>
+                                    <a href="../crud/update.php?upd_id=<?php echo $book->_id; ?>" class="btn btn-primary btn-sm px-4"><i class="bi bi-pen"></i></a>
+                                    <a href="../crud/delete.php?del_id=<?php echo $book->_id; ?>" class="btn btn-danger btn-sm px-4"><i class="bi bi-trash"></i></a>
+                                </td>
+                            </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
