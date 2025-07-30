@@ -1,7 +1,7 @@
 <?php require "config/config.php"     ?>
 <?php
 
-$books = $conn->query("SELECT * FROM book_table LIMIT 10");
+$books = $conn->query("SELECT * FROM book_table WHERE is_deleted = FALSE ORDER BY _id ASC LIMIT 10");
 $books -> execute();
 
 $allBooks = $books -> fetchAll(PDO::FETCH_OBJ);
