@@ -1,7 +1,7 @@
 <?php require "config/config.php"     ?>
 <?php
 
-$books = $conn->query("SELECT * FROM book_table LIMIT 5");
+$books = $conn->query("SELECT * FROM book_table LIMIT 10");
 $books -> execute();
 
 $allBooks = $books -> fetchAll(PDO::FETCH_OBJ);
@@ -125,7 +125,7 @@ $allBooks = $books -> fetchAll(PDO::FETCH_OBJ);
                 <div class="carousel-item active c-item">
                     <img src="https://images.pexels.com/photos/694740/pexels-photo-694740.jpeg" class="d-block w-100 c-img" alt="...">
                     <div class="carousel-caption top-0 mt-4">
-                        <p class="fs-3 mt-5 text-uppercase">organize your books</p>
+                        <p class="fs-3 mt-5 text-uppercase">cheapest books you can find</p>
                         <h1 class="display-1 fw-bolder text-capitalize">jilbert bookstore</h1>
                         <button type="button" class="btn btn-primary px-4 py-2 fs-5 mt-4" data-bs-toggle="modal" data-bs-target="#bookForm">Add Book</button>
                     </div>
@@ -133,15 +133,15 @@ $allBooks = $books -> fetchAll(PDO::FETCH_OBJ);
                 <div class="carousel-item c-item">
                     <img src="https://images.pexels.com/photos/990432/pexels-photo-990432.jpeg" class="d-block w-100 c-img" alt="...">
                     <div class="carousel-caption top-0 mt-4">
-                        <p class="fs-3 mt-5 text-uppercase">organize your books</p>
-                        <h1 class="display-1 fw-bolder text-capitalize">jilbert bookstore</h1>
+                        <p class="fs-3 mt-5 text-uppercase">hand picked recommendations</p>
+                        <h1 class="display-1 fw-bolder text-capitalize">Novel's no problem</h1>
                     </div>
                 </div>
                 <div class="carousel-item c-item">
                     <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg" class="d-block w-100 c-img" alt="...">
                     <div class="carousel-caption top-0 mt-4">
-                        <p class="fs-3 mt-5 text-uppercase">organize your books</p>
-                        <h1 class="display-1 fw-bolder text-capitalize">jilbert bookstore</h1>
+                        <p class="fs-3 mt-5 text-uppercase">you pick we deliver</p>
+                        <h1 class="display-1 fw-bolder text-capitalize">3 days delivery locally</h1>
                     </div>
                 </div>
             </div>
@@ -174,7 +174,7 @@ $allBooks = $books -> fetchAll(PDO::FETCH_OBJ);
 
         <section id="management">
             <div class="container text-center my-5">
-                <h1>Top 5 selling books</h1>
+                <h1>Top 10 selling books</h1>
             </div>
             <div class="container">
                 <div class="row">
