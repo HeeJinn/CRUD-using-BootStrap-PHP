@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2025 at 09:13 PM
+-- Generation Time: Jul 30, 2025 at 09:24 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -49,10 +49,10 @@ INSERT INTO `book_table` (`_id`, `name`, `author`, `image`, `date_published`, `p
 (14, 'Wuthering Waves', 'Kenley Russel Benitez', 'https://static0.thegamerimages.com/wordpress/wp-content/uploads/sharedimages/2024/12/mixcollage-25-dec-2024-03-54-am-8390.jpg', '2024-05-23', 'Kuro Games', 'Adventure', 1199, 0, 0),
 (15, 'Lord of the niga', 'Christian', 'https://m.media-amazon.com/images/M/MV5BNzIxMDQ2YTctNDY4MC00ZTRhLTk4ODQtMTVlOWY4NTdiYmMwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg', '2025-07-28', 'Soberano Inst.', 'History', 1200, 0, 0),
 (16, 'Demon Slayer', 'Jeano Genuino', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYKYAkuOMTaDKhMy0kmL91-6W-nSbAUkyrTw&s', '2017-02-07', 'Soberano Inst.', 'Action &#38; Adventure', 1200, 0, 0),
-(17, 'Nano Machine', 'Jilbert Alos', 'https://static.tvtropes.org/pmwiki/pub/images/n_7.jpg', '2015-10-27', 'MarLoafer Inc.', 'Action &#38; Adventure', 1600, 0, 0),
-(18, 'Rebirth of Heavenly Demon', 'Jeano Genuino', 'https://manhuaus.com/wp-content/uploads/2024/03/Reborn-As-The-Heavenly-Demon-1-175x238.webp', '2021-01-12', 'Kyoto Animation', 'History', 1399, 0, 0),
-(19, 'Myst Might Mayhem', 'Jilbert Alos', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1726111518i/218728008.jpg', '2021-06-23', 'MarLoafer Inc.', 'Horror', 1800, 0, 0),
-(22, 'Secret Class Vol. 4', 'Jeano Genuino', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1628862939i/58761106.jpg', '2021-08-20', 'Soberano Inst.', 'Romance', 2000, 0, NULL);
+(17, 'Nano Machine', 'Jilbert Alos', 'https://static.tvtropes.org/pmwiki/pub/images/n_7.jpg', '2015-10-27', 'MarLoafer Inc.', 'Action &#38; Adventure', 1600, 1, 2147483647),
+(18, 'Rebirth of Heavenly Demon', 'Jeano Genuino', 'https://manhuaus.com/wp-content/uploads/2024/03/Reborn-As-The-Heavenly-Demon-1-175x238.webp', '2021-01-12', 'Kyoto Animation', 'History', 1399, 1, 2147483647),
+(19, 'Myst Might Mayhem', 'Jilbert Alos', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1726111518i/218728008.jpg', '2021-06-23', 'MarLoafer Inc.', 'Horror', 1800, 1, 2147483647),
+(22, 'Secret Class Vol. 4', 'Jeano Genuino', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1628862939i/58761106.jpg', '2021-08-20', 'Soberano Inst.', 'Romance', 2000, 1, 2147483647);
 
 --
 -- Indexes for dumped tables

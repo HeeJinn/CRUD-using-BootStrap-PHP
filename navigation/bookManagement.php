@@ -5,7 +5,7 @@ $active_page = "book";
 ?>
 
 <?php
-$books = $conn->query("SELECT * FROM book_table");
+$books = $conn->query("SELECT * FROM book_table WHERE is_deleted = FALSE;");
 $books->execute();
 
 $allBooks = $books->fetchAll(PDO::FETCH_OBJ);
