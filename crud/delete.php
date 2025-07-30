@@ -13,5 +13,17 @@ if (isset($_GET['del_id'])) {
     }
 }
 
+if (isset($_GET['del_id'])) {
+    $bookId = $_GET['del_id'];
+    try {
+        $book = $conn->prepare('UPDATE book_table SET is_deleted = TRUE, deleted_at = NOW() WHERE id = :book_id');
+        $book->execute();
+        header('location: /Bootstrap practice/navigation/bookManagement.php');
+        exit();
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
 
 ?>
