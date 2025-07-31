@@ -2,9 +2,9 @@
 <?php
 
 $books = $conn->query("SELECT * FROM book_table WHERE is_deleted = FALSE ORDER BY _id ASC LIMIT 10");
-$books -> execute();
+$books->execute();
 
-$allBooks = $books -> fetchAll(PDO::FETCH_OBJ);
+$allBooks = $books->fetchAll(PDO::FETCH_OBJ);
 
 ?>
 
@@ -186,23 +186,31 @@ $allBooks = $books -> fetchAll(PDO::FETCH_OBJ);
             </div>
             <div class="container">
                 <div class="row">
-                    <?php foreach($allBooks as $book):   ?>
-                    <div class="col-md-4 col-xl-3 col-sm-6 mb-5 px-5 px-sm-1 px-md-2 px-xl-3 px-xxl-4">
-                        <div class="card c-carditem h-100">
-                            <a href="<?php echo$book->wiki;?>"><img src="<?php echo $book->image;  ?>" height="300px"  class="card-img-top" alt="Book Image"></a>
-                            <div class="card-body ">
-                                <h2 class="card-title "><?php echo $book->name  ?></h2>
-                                <p class="mb-0">Genre: <?php echo $book->genre  ?></p>
-                                <p class="card-text mb-0">Author: <?php echo $book->author  ?></p>
-                                <p class="mb-0">Publisher: <?php echo $book-> publisher ?></p>
-                                <p class="mb-0">Published: <?php echo $book-> date_published ?></p>
-                                <hr>
-                                <h4>Price: ₱ <?php echo $book-> price ?> </h4>
-
-                            </div>
+                    <?php if (empty($allBooks)) : ?>
+                        <div class="col">
+                            <img src="https://media.tenor.com/x-VKBImv-PwAAAAi/alone-sad.gif" class="rounded mx-auto mt-5 d-block" alt="Empty Data" style="height: 300px; width: 300px;">
+                            <h1 class="text-center text-secondary mb-5">Empty Books</h1>
                         </div>
-                    </div>
-                    <?php endforeach; ?>
+
+                    <?php else : ?>
+                        <?php foreach ($allBooks as $book):   ?>
+                            <div class="col-md-4 col-xl-3 col-sm-6 mb-5 px-5 px-sm-1 px-md-2 px-xl-3 px-xxl-4">
+                                <div class="card c-carditem h-100">
+                                    <a href="<?php echo $book->wiki; ?>"><img src="<?php echo $book->image;  ?>" height="300px" class="card-img-top" alt="Book Image"></a>
+                                    <div class="card-body ">
+                                        <h2 class="card-title "><?php echo $book->name  ?></h2>
+                                        <p class="mb-0">Genre: <?php echo $book->genre  ?></p>
+                                        <p class="card-text mb-0">Author: <?php echo $book->author  ?></p>
+                                        <p class="mb-0">Publisher: <?php echo $book->publisher ?></p>
+                                        <p class="mb-0">Published: <?php echo $book->date_published ?></p>
+                                        <hr>
+                                        <h4>Price: ₱ <?php echo $book->price ?> </h4>
+
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif ?>
                 </div>
             </div>
 

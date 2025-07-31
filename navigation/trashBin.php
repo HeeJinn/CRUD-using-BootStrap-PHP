@@ -75,7 +75,7 @@ try {
                     </div>
                 <?php endwhile; ?>
             <?php else : ?>
-                <img src="/Bootstrap practice/res/images/empty.png" class="rounded mx-auto mt-5 d-block" alt="Empty Data" style="height: 300px" width="300px">
+                <img src="https://media.tenor.com/x-VKBImv-PwAAAAi/alone-sad.gif" class="rounded mx-auto mt-5 d-block" alt="Empty Data" style="height: 300px; width: 300px;">
                 <h1 class="text-center text-secondary">Empty trash</h1>
             <?php endif; ?>
 
