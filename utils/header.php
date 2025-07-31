@@ -17,9 +17,6 @@
                         
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Author</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link <?php echo ($active_page == 'trash') ? 'active' : null; ?> " href="/Bootstrap practice/navigation/trashBin.php">Trash-Bin</a>
                     </li>
                 </ul>

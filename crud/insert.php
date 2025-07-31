@@ -11,10 +11,11 @@
         $publisherName = trim(filter_input(INPUT_POST, "publisherName", FILTER_SANITIZE_SPECIAL_CHARS));
         $genre = trim(filter_input(INPUT_POST, "genre", FILTER_SANITIZE_SPECIAL_CHARS));
         $price = filter_input(INPUT_POST, "price", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $wikiUrl = trim(filter_input(INPUT_POST, "wikiUrl", FILTER_SANITIZE_URL));
         
 
-        $insertQuery = $conn->prepare("INSERT INTO book_table (name, author, image, date_published, publisher, genre, price)
-        VALUES (:bookName, :authorName, :imageUrl, :datePublished, :publisherName, :genre, :price)");
+        $insertQuery = $conn->prepare("INSERT INTO book_table (name, author, image, date_published, publisher, genre, price, wiki)
+        VALUES (:bookName, :authorName, :imageUrl, :datePublished, :publisherName, :genre, :price, :wiki)");
 
         $params = [
             ':bookName' => $bookName,
@@ -23,7 +24,8 @@
             ':datePublished'=> $datePublished,
             ':publisherName'=> $publisherName,
             ':genre'=> $genre,
-            ':price'=> $price
+            ':price'=> $price,
+            ':wiki'=> $wikiUrl
         ];
 
         try{

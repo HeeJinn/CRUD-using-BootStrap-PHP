@@ -5,10 +5,27 @@ $active_page = "book";
 ?>
 
 <?php
-$books = $conn->query("SELECT * FROM book_table WHERE is_deleted = FALSE;");
-$books->execute();
 
-$allBooks = $books->fetchAll(PDO::FETCH_OBJ);
+$allBooks = null;
+if (isset($_GET["query"])) {
+    $query = trim($_GET["query"]);
+
+    try {
+        $search = $conn->prepare("SELECT * FROM book_table WHERE name LIKE :query;");
+        $queryWildcard = $query ."%";
+        $search->execute([":query" => $queryWildcard]); 
+        
+        $allBooks = $search->fetchAll(PDO::FETCH_OBJ);
+    } 
+    catch (Exception $e) {
+        echo "Failed to load data: ". $e->getMessage();
+    }
+}else {
+    $book = $conn->prepare("SELECT * FROM book_table WHERE is_deleted = FALSE;");
+    $book->execute(); 
+
+    $allBooks = $book->fetchAll(PDO::FETCH_OBJ);
+}
 ?>
 
 
@@ -34,11 +51,17 @@ $allBooks = $books->fetchAll(PDO::FETCH_OBJ);
                 <div class="col-sm-6 col-md-8 col-xl-9">
                     <h1>List of Books</h1>
                 </div>
-                <div class="col-sm-6 col-md-4 col-xl-3 ">
-                    <div class="form-floating">
-                        <input type="text" name="" id="searchbar" class="form-control" placeholder="Search Book">
-                        <label for="searchbar">Search Books</label>
-                    </div>
+                <div class="col-sm-6 col-md-4 col-xl-3">
+                    <form action="bookManagement.php" method="GET">
+                        <div class="input-group">
+                            <div class="form-floating flex-grow-1"> <input type="text" name="query" id="searchbar" class="form-control" placeholder="Search Book" value="<?php echo htmlspecialchars($_GET['query'] ?? ''); ?>">
+                                <label for="searchbar">Search Books</label>
+                            </div>
+                            <button class="btn btn-primary" type="submit">
+                                Search <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="card table-responsive shadow">

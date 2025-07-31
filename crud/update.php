@@ -27,6 +27,7 @@ if (isset($_POST['update'])) {
     $bookPublisher = htmlspecialchars(trim($_POST['book_publisher'] ?? ''));
     $bookGenre = htmlspecialchars(trim($_POST['book_genre'] ?? ''));
     $bookPrice = filter_var($_POST['book_price'] ?? '', FILTER_VALIDATE_FLOAT);
+    $wikiUrl = htmlspecialchars(trim($_POST['wiki_url'] ?? ''));
 
 
     if (empty($bookId) || empty($bookName) || empty($bookAuthor) || empty($bookImage) || empty($bookDatePublished) || empty($bookPublisher) || empty($bookGenre) || $bookPrice === false) {
@@ -43,7 +44,8 @@ if (isset($_POST['update'])) {
             date_published = :book_date_published,
             publisher = :book_publisher,
             genre = :book_genre,
-            price = :book_price
+            price = :book_price,
+            wiki = :wiki
             WHERE _id = :book_id");
 
 
@@ -55,7 +57,8 @@ if (isset($_POST['update'])) {
             ':book_publisher' => $bookPublisher,
             ':book_genre' => $bookGenre,
             ':book_price' => $bookPrice,
-            ':book_id' => $bookId
+            ':book_id' => $bookId,
+            'wiki'=> $wikiUrl
         ];
 
 
@@ -145,6 +148,10 @@ if (isset($_POST['update'])) {
                         <div class="col-xl-6 col-md-12 col-sm-12 mb-3">
                             <label for="price" class="form-label">Price</label>
                             <input type="number" class="form-control" id="price" name="book_price" placeholder="Enter Price" value="<?php echo htmlspecialchars($book['price']); ?>" required>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="wiki" class="form-label">Wiki URL</label>
+                            <input type="text" class="form-control" id="wiki" name="wiki_url" placeholder="Wiki URL" value="<?php echo htmlspecialchars($book['wiki']); ?>" required>
                         </div>
                     </div>
 
