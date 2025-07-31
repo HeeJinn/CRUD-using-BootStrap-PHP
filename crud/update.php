@@ -135,10 +135,10 @@ if (isset($_POST['update'])) {
                                 <option value="Science Fiction">Science Fiction</option>
                                 <option value="Mystery">Mystery</option>
                                 <option value="Thriller">Thriller</option>
-                                <option value="Action & Adventure">Action & Adventure</option>
+                                <option value="Action & Adventure">Action and Adventure</option>
                                 <option value="Young Adult">Young Adult</option>
-                                <option value="Children's">Children's</option>
-                                <option value="Biography/Memoir">Biography/Memoir</option>
+                                <option value="Children's">Children</option>
+                                <option value="Biography/Memoir">Biography</option>
                                 <option value="History">History</option>
                                 <option value="Self-Help">Self-Help</option>
                                 <option value="Cookbooks">Cookbooks</option>

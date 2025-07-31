@@ -12,7 +12,7 @@ if (isset($_GET["query"])) {
 
     try {
         $search = $conn->prepare("SELECT * FROM book_table WHERE name LIKE :query;");
-        $queryWildcard = $query ."%";
+        $queryWildcard = "%" . $query ."%";
         $search->execute([":query" => $queryWildcard]); 
         
         $allBooks = $search->fetchAll(PDO::FETCH_OBJ);
@@ -55,7 +55,7 @@ if (isset($_GET["query"])) {
                     <form action="bookManagement.php" method="GET">
                         <div class="input-group">
                             <div class="form-floating flex-grow-1"> <input type="text" name="query" id="searchbar" class="form-control" placeholder="Search Book" value="<?php echo htmlspecialchars($_GET['query'] ?? ''); ?>">
-                                <label for="searchbar">Search Books</label>
+                                <label for="searchbar">Search Book Name</label>
                             </div>
                             <button class="btn btn-primary" type="submit">
                                 Search <i class="bi bi-search"></i>
