@@ -3,6 +3,12 @@ require "../config/config.php";
 $active_page = "trash";
 
 ?>
+<?php 
+
+$deletedBooks = $conn->prepare("SELECT * FROM book_table WHERE is_deleted = TRUE;");
+$deletedBooks->execute();
+
+?>
 
 
 
@@ -30,23 +36,24 @@ $active_page = "trash";
         </section>
 
         <section class="container">
-            <p class="fs-4 px-xxl-5 text-secondary">recent</p>
+            <p class="fs-5 px-xxl-5 text-secondary">recently deleted </p>
         </section>
 
         <section class="container px-3 ">
+            <?php while($row = $deletedBooks->fetch(PDO::FETCH_OBJ)) : ?>
             <div class="card mb-3 mx-auto shadow-sm" style="max-width: 1200px; height: 150px;">
                 <div class="d-flex h-100 flex-row w-100">
                     <div style="flex: 0 0 200px;">
-                        <img src="https://i.redd.it/ayut0tsees0d1.jpeg"
+                        <img src="<?php echo $row->image; ?>"
                             alt="Book Image"
                             class="h-100 w-100 rounded-start object-fit-cover"
                             style="object-fit: cover;">
                     </div>
                     <div class="flex-grow-1 d-flex align-items-center px-3">
                         <div>
-                            <h5 class="card-title mb-1">Book name: Nano Machine</h5>
+                            <h5 class="card-title mb-1">Book name: <?php echo $row->name; ?></h5>
                             <p class="card-text mb-0">
-                                <small class="text-body-secondary">Deleted at 22-09-2025</small>
+                                <small class="text-body-secondary">Deleted at <?php echo $row->deleted_at; ?></small>
                             </p>
                         </div>
                     </div>
@@ -56,6 +63,7 @@ $active_page = "trash";
 
                 </div>
             </div>
+            <?php endwhile; ?>
         </section>
 
 

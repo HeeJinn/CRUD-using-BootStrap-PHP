@@ -181,7 +181,7 @@ $allBooks = $books -> fetchAll(PDO::FETCH_OBJ);
                     <?php foreach($allBooks as $book):   ?>
                     <div class="col-md-4 col-xl-3 col-sm-6 mb-5 px-5 px-sm-1 px-md-2 px-xl-3 px-xxl-4">
                         <div class="card c-carditem h-100">
-                            <img src="<?php echo $book->image;  ?>" height="300px"  class="card-img-top" alt="...">
+                            <img src="<?php echo $book->image;  ?>" height="300px"  class="card-img-top" alt="Book Image">
                             <div class="card-body ">
                                 <h2 class="card-title "><?php echo $book->name  ?></h2>
                                 <p class="mb-0">Genre: <?php echo $book->genre  ?></p>
