@@ -3,10 +3,19 @@ require "../config/config.php";
 $active_page = "trash";
 
 ?>
-<?php 
+<?php
+$deletedBooks = null;
+$bookFound = false;
 
-$deletedBooks = $conn->prepare("SELECT * FROM book_table WHERE is_deleted = TRUE;");
-$deletedBooks->execute();
+try {
+    $deletedBooks = $conn->prepare("SELECT * FROM book_table WHERE is_deleted = TRUE;");
+    $deletedBooks->execute();
+    if ($deletedBooks->rowCount() > 0) {
+        $bookFound = true;
+    }
+} catch (Exception $e) {
+    echo "Failed to fetch data" . $e->getMessage();
+}
 
 ?>
 
@@ -40,30 +49,36 @@ $deletedBooks->execute();
         </section>
 
         <section class="container px-3 ">
-            <?php while($row = $deletedBooks->fetch(PDO::FETCH_OBJ)) : ?>
-            <div class="card mb-3 mx-auto shadow-sm" style="max-width: 1200px; height: 150px;">
-                <div class="d-flex h-100 flex-row w-100">
-                    <div style="flex: 0 0 200px;">
-                        <img src="<?php echo $row->image; ?>"
-                            alt="Book Image"
-                            class="h-100 w-100 rounded-start object-fit-cover"
-                            style="object-fit: cover;">
-                    </div>
-                    <div class="flex-grow-1 d-flex align-items-center px-3">
-                        <div>
-                            <h5 class="card-title mb-1">Book name: <?php echo $row->name; ?></h5>
-                            <p class="card-text mb-0">
-                                <small class="text-body-secondary">Deleted at <?php echo $row->deleted_at; ?></small>
-                            </p>
+            <?php if ($bookFound) : ?>
+                <?php while ($row = $deletedBooks->fetch(PDO::FETCH_OBJ)) : ?>
+                    <div class="card mb-3 mx-auto shadow-sm" style="max-width: 1200px; height: 150px;">
+                        <div class="d-flex h-100 flex-row w-100">
+                            <div style="flex: 0 0 200px;">
+                                <img src="<?php echo $row->image; ?>"
+                                    alt="Book Image"
+                                    class="h-100 w-100 rounded-start object-fit-cover"
+                                    style="object-fit: cover;">
+                            </div>
+                            <div class="flex-grow-1 d-flex align-items-center px-3">
+                                <div>
+                                    <h5 class="card-title mb-1">Book name: <?php echo $row->name; ?></h5>
+                                    <p class="card-text mb-0">
+                                        <small class="text-body-secondary">Deleted at <?php echo $row->deleted_at; ?></small>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center pe-3">
+                                <a href="../crud/restore.php?restore_id=<?php echo $row->_id; ?>" class="btn btn-sm btn-primary">Restore</a>
+                            </div>
+
                         </div>
                     </div>
-                    <div class="d-flex align-items-center pe-3">
-                        <a href="#" class="btn btn-sm btn-primary">Restore</a>
-                    </div>
+                <?php endwhile; ?>
+            <?php else : ?>
+                <img src="/Bootstrap practice/res/images/empty.png" class="rounded mx-auto mt-5 d-block" alt="Empty Data" style="height: 300px" width="300px">
+                <h1 class="text-center text-secondary">Empty trash</h1>
+            <?php endif; ?>
 
-                </div>
-            </div>
-            <?php endwhile; ?>
         </section>
 
 
